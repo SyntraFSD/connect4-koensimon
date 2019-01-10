@@ -92,6 +92,10 @@ Make an attractive landing page:
     - MDN (https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX/Getting_Started) 
 - Call Stack:
     - Free Code Camp (https://medium.freecodecamp.org/understanding-the-javascript-call-stack-861e41ae61d4)
+- Exercises:
+    - Exercism (https://exercism.io/)
+    - Nodeschool (https://nodeschool.io/)
+    - Codingame (https://www.codingame.com)
 ### 5.2 CSS
 - Flex Box:
     - CSS-Tricks (https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
