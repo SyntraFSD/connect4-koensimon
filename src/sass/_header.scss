@@ -1,0 +1,63 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  background-color: $header-color;
+  align-items: center;
+  padding: .5rem;
+
+
+  &-title {
+    color: $link-color;
+    text-decoration: none;
+    font-size: 2rem;
+  }
+
+  &-links {
+    &--desktop {
+      @media screen and (max-width: $break-small) {
+        display: none;
+      }
+
+      &-link {
+        color: $link-color;
+        text-decoration: none;
+        font-size: 1rem;
+
+        &:first-child {
+          margin-right: 1rem;
+        }
+      }
+    }
+
+    &--mobile {
+      @media screen and (min-width: $break-small) {
+        display: none;
+      }
+      width: 1.5rem;
+      height: .2rem;
+      background-color: $link-color;
+      position: relative;
+      border-radius: .1rem;
+      &:before{
+        border-radius: .1rem;
+        position: absolute;
+        top: -.5rem;
+        display: block;
+        content: "";
+        width: 1.5rem;
+        height: .2rem;
+        background-color: $link-color;
+      }
+      &:after{
+        border-radius: .1rem;
+        position: absolute;
+        bottom: -.5rem;
+        display: block;
+        content: "";
+        width: 1.5rem;
+        height: .2rem;
+        background-color: $link-color;
+      }
+    }
+  }
+}

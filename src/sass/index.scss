@@ -1,0 +1,15 @@
+@import "normalize";
+
+$break-small: 480px;
+$break-large: 1200px;
+
+$link-color: #d4d9e0;
+$header-color: #357c80;
+$font: sans-serif;
+
+body {
+  margin: 0;
+  font-family: $font;
+}
+
+@import "header";
