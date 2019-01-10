@@ -89,7 +89,8 @@ Make an attractive landing page:
 - Callbacks!!:
     - Flavio Copes (https://flaviocopes.com/javascript-callbacks/)
 - AJAX:
-    - MDN (https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX/Getting_Started) 
+    - MDN (https://developer.mozilla.org/en-US/docs/Web/Guide/AJAX/Getting_Started)
+    - Test API (https://jsonplaceholder.typicode.com/) 
 - Call Stack:
     - Free Code Camp (https://medium.freecodecamp.org/understanding-the-javascript-call-stack-861e41ae61d4)
 - Exercises:
