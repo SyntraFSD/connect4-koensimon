@@ -9,6 +9,9 @@ nav,footer {
   align-items: center;
   background-color: darkolivegreen;
 }
+nav{
+  position: relative;
+}
 nav a{
   padding: 10px;
   margin-left: 25px;
@@ -48,38 +51,67 @@ footer {
       display: none;
     }
   }
-  &--mobile {
+  &--mobile{
     @media screen and (min-width: 480px) {
       display: none;
     }
+  }
+  &--mobile {
 
-    width: 1.5rem;
-    height: .2rem;
-    background-color: white;
-    position: relative;
-    border-radius: .1rem;
-    margin: 20px;
-
-    &:before{
-      border-radius: .1rem;
+    &-dropdown {
       position: absolute;
-      top: -.5rem;
-      display: block;
-      content: "";
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+
+      &-link {
+        text-align: center;
+        text-decoration: none;
+        color: darkolivegreen;
+        padding: 10px;
+        border: darkolivegreen solid 1px;
+        margin: 0;
+      }
+
+      &.inactive{
+        display: none;
+      }
+    }
+
+    &-hamburger {
+
       width: 1.5rem;
       height: .2rem;
       background-color: white;
-    }
-    &:after{
+      position: relative;
       border-radius: .1rem;
-      position: absolute;
-      bottom: -.5rem;
-      display: block;
-      content: "";
-      width: 1.5rem;
-      height: .2rem;
-      background-color: white;
-    }
+      margin: 20px;
 
+      &:before {
+        border-radius: .1rem;
+        position: absolute;
+        top: -.5rem;
+        display: block;
+        content: "";
+        width: 1.5rem;
+        height: .2rem;
+        background-color: white;
+      }
+      &:after {
+        border-radius: .1rem;
+        position: absolute;
+        bottom: -.5rem;
+        display: block;
+        content: "";
+        width: 1.5rem;
+        height: .2rem;
+        background-color: white;
+      }
+
+    }
   }
 }
