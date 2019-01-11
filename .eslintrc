@@ -5,5 +5,9 @@
     "node": true
   },
   "extends": "airbnb",
-  "rules": {}
+  "rules": {
+    "no-param-reassign": 0,
+    "linebreak-style": 0,
+    "radix": 0
+  }
 }
