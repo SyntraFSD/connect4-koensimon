@@ -1,5 +1,6 @@
 .Header {
   display: flex;
+  position: relative;
   justify-content: space-between;
   background-color: $header-color;
   align-items: center;
@@ -33,30 +34,58 @@
       @media screen and (min-width: $break-small) {
         display: none;
       }
-      width: 1.5rem;
-      height: .2rem;
-      background-color: $link-color;
-      position: relative;
-      border-radius: .1rem;
-      &:before{
-        border-radius: .1rem;
+      &-dropdown{
         position: absolute;
-        top: -.5rem;
-        display: block;
-        content: "";
-        width: 1.5rem;
-        height: .2rem;
-        background-color: $link-color;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: $header-dropdown-color;
+        display: flex;
+        flex-direction: column;
+        &-link{
+          text-align: center;
+          text-decoration: none;
+          color: $link-color;
+          padding: .5rem;
+        }
+
+        &.inactive{
+          display: none;
+        }
+
+        &.active{
+          display: flex;
+        }
       }
-      &:after{
-        border-radius: .1rem;
-        position: absolute;
-        bottom: -.5rem;
-        display: block;
-        content: "";
+
+      &-hamburger{
         width: 1.5rem;
         height: .2rem;
         background-color: $link-color;
+        position: relative;
+        border-radius: .1rem;
+
+        &:before {
+          border-radius: .1rem;
+          position: absolute;
+          top: -.5rem;
+          display: block;
+          content: "";
+          width: 1.5rem;
+          height: .2rem;
+          background-color: $link-color;
+        }
+
+        &:after {
+          border-radius: .1rem;
+          position: absolute;
+          bottom: -.5rem;
+          display: block;
+          content: "";
+          width: 1.5rem;
+          height: .2rem;
+          background-color: $link-color;
+        }
       }
     }
   }
