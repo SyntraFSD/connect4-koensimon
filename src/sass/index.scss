@@ -1,5 +1,7 @@
 @import "_superSlider.scss";
-
+body{
+  margin: 0;
+}
 nav,footer {
   display: flex;
   flex-direction: row;
@@ -28,6 +30,17 @@ footer p{
   margin: 20px 0px;
 }
 
+footer {
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+
+    p{
+      text-align: center;
+      padding: 5px;
+    }
+  }
+}
 
 .Header-links {
   &--desktop {
@@ -67,5 +80,6 @@ footer p{
       height: .2rem;
       background-color: white;
     }
+
   }
 }
