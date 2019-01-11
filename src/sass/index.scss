@@ -1,0 +1,71 @@
+@import "_superSlider.scss";
+
+nav,footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: darkolivegreen;
+}
+nav a{
+  padding: 10px;
+  margin-left: 25px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+}
+nav img{
+  width: 50px;
+}
+footer p{
+  padding: 20px;
+  color: white;
+}
+.smaller a{
+  font-size: 17px;
+}
+.super-slider{
+  margin: 20px 0px;
+}
+
+
+.Header-links {
+  &--desktop {
+    @media screen and (max-width: 480px) {
+      display: none;
+    }
+  }
+  &--mobile {
+    @media screen and (min-width: 480px) {
+      display: none;
+    }
+
+    width: 1.5rem;
+    height: .2rem;
+    background-color: white;
+    position: relative;
+    border-radius: .1rem;
+    margin: 20px;
+
+    &:before{
+      border-radius: .1rem;
+      position: absolute;
+      top: -.5rem;
+      display: block;
+      content: "";
+      width: 1.5rem;
+      height: .2rem;
+      background-color: white;
+    }
+    &:after{
+      border-radius: .1rem;
+      position: absolute;
+      bottom: -.5rem;
+      display: block;
+      content: "";
+      width: 1.5rem;
+      height: .2rem;
+      background-color: white;
+    }
+  }
+}
