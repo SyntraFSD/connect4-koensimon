@@ -22,7 +22,7 @@ function getFormData(form) {
   var inputFields = loginForm.querySelectorAll('input');
   var formData = {};
   inputFields.forEach(function (inputField) {
-    postData[inputField.username] = inputField.value;
+    formData[inputField.username] = inputField.value;
   });
   return formData;
 }
@@ -31,14 +31,20 @@ function login(event) {
   event.preventDefault();
   var formData = getFormData(loginForm);
   var request = new XMLHttpRequest();
-  request.addEventListener('readystatechange', function (event) {});
-  request.open('POST', '');
+  request.addEventListener('readystatechange', function (event) {
+    console.log(event);
+  });
+  request.open('POST', 'http://connect4.pienter.space/api/auth/login');
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify(formData));
-  loginSwitch.addEventListener('click', showRegisterForm);
-  registerSwitch.addEventListener('click', showLoginForm);
-  loginForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-  });
 }
+
+function register(event) {
+  event.preventDefault();
+  var formData = getFormData(registerForm);
+}
+
+loginSwitch.addEventListener('click', showRegisterForm);
+registerSwitch.addEventListener('click', showLoginForm);
+loginForm.addEventListener('submit', login);
 //# sourceMappingURL=login.js.map
