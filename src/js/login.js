@@ -42,5 +42,6 @@ loginSwitch.addEventListener('click', showRegisterForm);
 registerSwitch.addEventListener('click', showLoginForm);
 loginForm.addEventListener('submit', function(event) {
   event.preventDefault();
+
 });
 
