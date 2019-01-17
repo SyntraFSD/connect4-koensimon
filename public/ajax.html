@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX For Life</title>
+</head>
+<body>
+<input id="test-method-1" typr="text" value="GET">
+<input id="test-endpoint-1" typr="text" value="posts">
+
+<
+<button id="test-btn-1">
+  Test AJAX 1
+</button>
+
+<form id="input">
+  <div><label for="title">Title<input name="title" id="title" type="text"></div>
+  <div><label for="body">Body<input name="body" id="body" type="text"></div>
+</form>
+<div id="output"></div>
+
+<script>
+  const testBtn1 = document.querySelector('#test-btn-1');
+  const testMethod = document.querySelector('#test-method-1');
+  const testEndpoint = document.querySelector('#test-endpoint-1');
+  const output = document.querySelector('#output');
+  const inputTitle = document.querySelector('#title');
+  const inputBody = document.querySelector('#body');
+
+
+  function handleRequest(event){
+    // console.log(event.target.readyState);
+    const request = event.target;
+    if(request.readyState === 4) {
+      // console.log(JSON.parse(request.responseText));
+      console.log(request.status);
+      if(request.status >= 200 && request.status < 300){
+        const response = JSON.parse(request.responseText);
+        output.textContent = response.title;
+      } else {
+        alert('da´s ni just');
+      }
+    }
+
+  }
+
+  testBtn1.addEventListener('click', function() {
+    const request = new XMLHttpRequest();
+    const title = inputTitle.value;
+    const body = inputBody.value;
+    const sendData = {
+      'title':title,
+      'body': body
+    }
+
+    request.addEventListener('readystatechange', handleRequest);
+
+    request.open('POST', 'https://jsonplaceholder.typicode.com/posts');
+    request.setRequestHeader('content-type', 'application/json');
+    request.send(JSON.stringify(sendData));
+  });
+</script>
+
+</body>
+</html>
