@@ -6,7 +6,7 @@
 }
 
 .ss-container.loading {
-  min-height: 50px
+  min-height: 50px;
 }
 
 .ss-container.loading:before {
@@ -115,7 +115,7 @@ footer p {
 }
 
 .smaller a {
-  font-size: 17px
+  font-size: 24px;
 }
 
 .super-slider {
