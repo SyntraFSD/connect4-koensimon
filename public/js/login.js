@@ -1,9 +1,9 @@
-const loginSwitch = document.querySelector('.login-switch');
-const registerSwitch = document.querySelector('.register-switch');
-const loginForm = document.querySelector('.wrapper');
-const registerForm = document.querySelector('.wrapper-registration');
+var loginSwitch = document.querySelector('.login-switch');
+var registerSwitch = document.querySelector('.register-switch');
+var loginForm = document.querySelector('.wrapper');
+var registerForm = document.querySelector('.wrapper-registration');
 
-function switchForm(fromForm, toForm){
+function switchForm(fromForm, toForm) {
   fromForm.classList.add('hide');
   toForm.classList.remove('hide');
 }
@@ -19,8 +19,8 @@ function showRegisterForm(event) {
 }
 
 function getFormData(form) {
-  const inputFields = loginForm.querySelectorAll('input');
-  const formData = {};
+  var inputFields = loginForm.querySelectorAll('input');
+  var formData = {};
   inputFields.forEach(function (inputField) {
     formData[inputField.username] = inputField.value;
   });
@@ -29,8 +29,8 @@ function getFormData(form) {
 
 function login(event) {
   event.preventDefault();
-  const formData = getFormData(loginForm);
-  const request = new XMLHttpRequest();
+  var formData = getFormData(loginForm);
+  var request = new XMLHttpRequest();
   request.addEventListener('readystatechange', function (event) {
     console.log(event);
   });
@@ -39,11 +39,12 @@ function login(event) {
   request.send(JSON.stringify(formData));
 }
 
-function register(event){
+function register(event) {
   event.preventDefault();
-  const formData = getFormData(registerForm);
+  var formData = getFormData(registerForm);
 }
 
 loginSwitch.addEventListener('click', showRegisterForm);
 registerSwitch.addEventListener('click', showLoginForm);
 loginForm.addEventListener('submit', login);
+//# sourceMappingURL=login.js.map
