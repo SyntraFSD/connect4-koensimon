@@ -1,9 +1,12 @@
+console.log('hallo');
 const token = window.localStorage.getItem('token');
 
 const request = new XMLHttpRequest();
-request.addEventListener('readystatechange',function (event) {
-  if (event.readystate === 4) {
-    console.log(event);
+request.addEventListener('readystatechange', function (event) {
+  if (request.readystate === 4) {
+    if (request.status >= 200 && request.status < 300) {
+      console.log(JSON.parse(request.responseText));
+    }
   }
 });
 
