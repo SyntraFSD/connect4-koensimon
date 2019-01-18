@@ -47,7 +47,7 @@ function handleLoginRequest(event) {
   if (request.readyState === 4) {
     const response = JSON.parse(request.responseText);
     if (request.status >= 200 && request.status < 300) {
-      showLoginRequest('joepie je bent ingelogd', false);
+      showLoginRequest('joepie je bent ingelogd', true);
       if (response.access_token) {
         window.localStorage.setItem('token', response.access_token);
       }
