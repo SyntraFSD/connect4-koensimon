@@ -59,6 +59,7 @@ function handleLoginRequest(event) {
       console.log(request);
     } else if (request.status === 401) {
       showLoginRequest(response.error, false);
+      window.location = 'closed.html';
     }
   }
 }
@@ -102,5 +103,4 @@ registerSwitch.addEventListener('click', showLoginForm);
 loginForm.addEventListener('submit', login);
 registerForm.addEventListener('submit', register);
 loginForm.addEventListener('input', hideLoginAlert);
-window.history.pushState({}, 'test2', 'closed.html');
 //# sourceMappingURL=login.js.map
