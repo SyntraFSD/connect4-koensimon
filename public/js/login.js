@@ -2,6 +2,7 @@ var loginSwitch = document.querySelector('.login-switch');
 var registerSwitch = document.querySelector('.register-switch');
 var loginForm = document.querySelector('.wrapper');
 var registerForm = document.querySelector('.wrapper-registration');
+var loginAlert = document.querySelector('error');
 
 function switchForm(fromForm, toForm) {
   fromForm.classList.add('hide');
@@ -18,6 +19,15 @@ function showRegisterForm(event) {
   switchForm(loginForm, registerForm);
 }
 
+function showLoginRequest(responseText) {
+  loginAlert.classList.remove('hide');
+  loginAlert.textContent = responseText;
+}
+
+function hideLoginAlert() {
+  loginAlert.classList.add('hide');
+}
+
 function getFormData(form) {
   var inputFields = loginForm.querySelectorAll('input');
   var formData = {};
@@ -31,12 +41,13 @@ function handleLoginRequest(event) {
   var request = event.target;
 
   if (request.readyState === 4) {
+    var response = JSON.parse(request.responseText);
+
     if (request.status >= 200 && request.status < 300) {
       console.log('success');
       console.log(request);
-    } else {
-      console.log('error');
-      console.log(request);
+    } else if (request.status === 401) {
+      showLoginRequest(response.error);
     }
   }
 }
@@ -79,4 +90,5 @@ loginSwitch.addEventListener('click', showRegisterForm);
 registerSwitch.addEventListener('click', showLoginForm);
 loginForm.addEventListener('submit', login);
 registerForm.addEventListener('submit', register);
+loginForm.addEventListener('input', hideLoginAlert);
 //# sourceMappingURL=login.js.map

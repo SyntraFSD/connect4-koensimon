@@ -2,6 +2,7 @@ const loginSwitch = document.querySelector('.login-switch');
 const registerSwitch = document.querySelector('.register-switch');
 const loginForm = document.querySelector('.wrapper');
 const registerForm = document.querySelector('.wrapper-registration');
+const loginAlert = document.querySelector('error');
 
 function switchForm(fromForm, toForm){
   fromForm.classList.add('hide');
@@ -18,6 +19,16 @@ function showRegisterForm(event) {
   switchForm(loginForm, registerForm);
 }
 
+function showLoginRequest (responseText){
+  loginAlert.classList.remove('hide');
+  loginAlert.textContent = responseText;
+
+}
+
+function hideLoginAlert() {
+  loginAlert.classList.add('hide');
+}
+
 function getFormData(form) {
   const inputFields = loginForm.querySelectorAll('input');
   const formData = {};
@@ -30,12 +41,12 @@ function getFormData(form) {
 function handleLoginRequest(event){
   const request = event.target;
   if(request.readyState === 4){
+    const response = JSON.parse(request.responseText);
     if(request.status >= 200 && request.status < 300){
       console.log('success');
       console.log(request);
-    } else {
-      console.log('error');
-      console.log(request);
+    } else if (request.status === 401) {
+      showLoginRequest(response.error);
     }
   }
 }
@@ -77,3 +88,4 @@ loginSwitch.addEventListener('click', showRegisterForm);
 registerSwitch.addEventListener('click', showLoginForm);
 loginForm.addEventListener('submit', login);
 registerForm.addEventListener('submit', register);
+loginForm.addEventListener('input', hideLoginAlert);
