@@ -54,7 +54,7 @@ button {
 }
 
 h2 {
-  margin-left: 30%;
+  margin-left: 30.5%;
 }
 
 h4 {
@@ -69,6 +69,14 @@ h4 {
   margin-top: 50px;
 }
 
-p .error {
-  background: red;
+p.error {
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: darkred;
+  color: white;
+}
+p.success{
+  background-color: darkolivegreen;
+  color: white;
 }
