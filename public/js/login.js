@@ -2,7 +2,7 @@ var loginSwitch = document.querySelector('.login-switch');
 var registerSwitch = document.querySelector('.register-switch');
 var loginForm = document.querySelector('.wrapper');
 var registerForm = document.querySelector('.wrapper-registration');
-var loginAlert = document.querySelector('error');
+var loginAlert = document.querySelector('.error');
 
 function switchForm(fromForm, toForm) {
   fromForm.classList.add('hide');
@@ -19,7 +19,13 @@ function showRegisterForm(event) {
   switchForm(loginForm, registerForm);
 }
 
-function showLoginRequest(responseText) {
+function showLoginRequest(responseText, success) {
+  if (success) {
+    loginAlert.classList.add('success');
+  } else {
+    loginAlert.classList.remove('success');
+  }
+
   loginAlert.classList.remove('hide');
   loginAlert.textContent = responseText;
 }
@@ -28,8 +34,8 @@ function hideLoginAlert() {
   loginAlert.classList.add('hide');
 }
 
-function getFormData(form) {
-  var inputFields = loginForm.querySelectorAll('input');
+function getFormData(Form) {
+  var inputFields = Form.querySelectorAll('input');
   var formData = {};
   inputFields.forEach(function (inputField) {
     formData[inputField.name] = inputField.value;
@@ -44,10 +50,15 @@ function handleLoginRequest(event) {
     var response = JSON.parse(request.responseText);
 
     if (request.status >= 200 && request.status < 300) {
-      console.log('success');
+      showLoginRequest('joepie je bent ingelogd', false);
+
+      if (response.access_token) {
+        window.localStorage.setItem('token', response.access_token);
+      }
+
       console.log(request);
     } else if (request.status === 401) {
-      showLoginRequest(response.error);
+      showLoginRequest(response.error, false);
     }
   }
 }

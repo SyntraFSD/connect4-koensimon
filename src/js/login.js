@@ -2,9 +2,9 @@ const loginSwitch = document.querySelector('.login-switch');
 const registerSwitch = document.querySelector('.register-switch');
 const loginForm = document.querySelector('.wrapper');
 const registerForm = document.querySelector('.wrapper-registration');
-const loginAlert = document.querySelector('error');
+const loginAlert = document.querySelector('.error');
 
-function switchForm(fromForm, toForm){
+function switchForm(fromForm, toForm) {
   fromForm.classList.add('hide');
   toForm.classList.remove('hide');
 }
@@ -19,42 +19,50 @@ function showRegisterForm(event) {
   switchForm(loginForm, registerForm);
 }
 
-function showLoginRequest (responseText){
+function showLoginRequest(responseText, success) {
+  if (success) {
+    loginAlert.classList.add('success');
+  } else {
+    loginAlert.classList.remove('success');
+  }
   loginAlert.classList.remove('hide');
   loginAlert.textContent = responseText;
-
 }
 
 function hideLoginAlert() {
   loginAlert.classList.add('hide');
 }
 
-function getFormData(form) {
-  const inputFields = loginForm.querySelectorAll('input');
+function getFormData(Form) {
+  const inputFields = Form.querySelectorAll('input');
   const formData = {};
-  inputFields.forEach(function (inputField) {
+  inputFields.forEach((inputField) => {
     formData[inputField.name] = inputField.value;
   });
   return formData;
 }
 
-function handleLoginRequest(event){
+function handleLoginRequest(event) {
   const request = event.target;
-  if(request.readyState === 4){
+  if (request.readyState === 4) {
     const response = JSON.parse(request.responseText);
-    if(request.status >= 200 && request.status < 300){
-      console.log('success');
+    if (request.status >= 200 && request.status < 300) {
+      showLoginRequest('joepie je bent ingelogd', false);
+      if (response.access_token ) {
+        window.localStorage.setItem('token', response.access_token);
+      }
+
       console.log(request);
     } else if (request.status === 401) {
-      showLoginRequest(response.error);
+      showLoginRequest(response.error, false);
     }
   }
 }
 
-function handleRegisterRequest(event){
+function handleRegisterRequest(event) {
   const request = event.target;
-  if(request.readyState === 4){
-    if(request.status >= 200 && request.status < 300){
+  if (request.readyState === 4) {
+    if (request.status >= 200 && request.status < 300) {
       console.log('success');
       console.log(request);
     } else {
@@ -74,7 +82,7 @@ function login(event) {
   request.send(JSON.stringify(formData));
 }
 
-function register(event){
+function register(event) {
   event.preventDefault();
   const formData = getFormData(registerForm);
   const request = new XMLHttpRequest();
