@@ -2,6 +2,7 @@ const loginSwitch = document.querySelector('.login-switch');
 const registerSwitch = document.querySelector('.register-switch');
 const loginForm = document.querySelector('.wrapper');
 const registerForm = document.querySelector('.wrapper-registration');
+const loginAlert = document.querySelector('error');
 
 function switchForm(fromForm, toForm){
   fromForm.classList.add('hide');
@@ -18,48 +19,34 @@ function showRegisterForm(event) {
   switchForm(loginForm, registerForm);
 }
 
+function showLoginRequest (responseText){
+  loginAlert.classList.remove('hide');
+  loginAlert.textContent = responseText;
+
+}
+
+function hideLoginAlert() {
+  loginAlert.classList.add('hide');
+}
+
 function getFormData(form) {
   const inputFields = loginForm.querySelectorAll('input');
   const formData = {};
   inputFields.forEach(function (inputField) {
-<<<<<<< HEAD
-    postData[inputField.username] = inputField.value;
-=======
     formData[inputField.name] = inputField.value;
->>>>>>> dacb2d74e57164f2ecf6fc5f35e4ab399ae254a4
   });
   return formData;
 }
 
-<<<<<<< HEAD
-function login(event){
-  event.preventDefault();
-  const formData = getFormData(loginForm);
-  const request = new XMLHttpRequest();
-  request.addEventListener('readystatechange', function (event) {
-
-  });
-  request.open('POST', '');
-  request.setRequestHeader('Content-Type', 'application/json');
-  request.send(JSON.stringify(formData));
-
-loginSwitch.addEventListener('click', showRegisterForm);
-registerSwitch.addEventListener('click', showLoginForm);
-loginForm.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-});
-
-=======
 function handleLoginRequest(event){
   const request = event.target;
   if(request.readyState === 4){
+    const response = JSON.parse(request.responseText);
     if(request.status >= 200 && request.status < 300){
       console.log('success');
       console.log(request);
-    } else {
-      console.log('error');
-      console.log(request);
+    } else if (request.status === 401) {
+      showLoginRequest(response.error);
     }
   }
 }
@@ -101,4 +88,4 @@ loginSwitch.addEventListener('click', showRegisterForm);
 registerSwitch.addEventListener('click', showLoginForm);
 loginForm.addEventListener('submit', login);
 registerForm.addEventListener('submit', register);
->>>>>>> dacb2d74e57164f2ecf6fc5f35e4ab399ae254a4
+loginForm.addEventListener('input', hideLoginAlert);
