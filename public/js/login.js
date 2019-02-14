@@ -54,10 +54,9 @@ function handleLoginRequest(event) {
 
       if (response.access_token) {
         window.localStorage.setItem('token', response.access_token);
+        setTimeout(function () {});
         window.location = 'closed.html';
       }
-
-      console.log(request);
     } else if (request.status === 401) {
       showLoginRequest(response.error, false);
     }
@@ -103,4 +102,5 @@ registerSwitch.addEventListener('click', showLoginForm);
 loginForm.addEventListener('submit', login);
 registerForm.addEventListener('submit', register);
 loginForm.addEventListener('input', hideLoginAlert);
+window.history.pushState({}, 'test2', 'closed.html');
 //# sourceMappingURL=login.js.map

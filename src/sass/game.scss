@@ -1,0 +1,51 @@
+$boardWidth: 80vw;
+$maxBoardWith: 700px;
+
+
+main {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  #board {
+    box-sizing: border-box;
+    display: flex;
+    width: $boardWidth;
+    max-width: $maxBoardWith;
+    border: solid 1px black;
+
+    .row {
+      box-sizing: border-box;
+      border: solid 1px black;
+      width: calc(#{$boardWidth} / 7);
+      max-width: calc(#{$maxBoardWith} / 7);
+      height: calc(#{$boardWidth} / 7);
+      max-height: calc(#{$maxBoardWith} / 7);
+      position: relative;
+      background-color: black;
+
+      &::before {
+        content: '';
+        box-sizing: border-box;
+        border-radius: 50%;
+        display: block;
+        position: absolute;
+        top: 5%;
+        bottom: 5%;
+        left: 5%;
+        right: 5%;
+      }
+
+      &.empty::before {
+        background-color: navajowhite;
+      }
+
+      &.red::before {
+        background-color: indianred;
+      }
+
+      &.yellow::before {
+        background-color: yellow;
+      }
+    }
+  }
+}
