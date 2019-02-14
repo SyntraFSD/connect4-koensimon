@@ -50,13 +50,13 @@ function handleLoginRequest(event) {
       showLoginRequest('joepie je bent ingelogd', true);
       if (response.access_token) {
         window.localStorage.setItem('token', response.access_token);
+        setTimeout(function () {
+          
+        })
+        window.location = 'closed.html';
       }
-
-      console.log(request);
     } else if (request.status === 401) {
       showLoginRequest(response.error, false);
-
-      window.location = 'closed.html';
     }
   }
 }
