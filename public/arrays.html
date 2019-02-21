@@ -1,0 +1,267 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Arrays</title>
+
+  <style>
+    .board{
+      margin: 2rem auto;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .col {
+      width: 5rem;
+      height: 5rem;
+      border: 2px solid white;
+      line-height: 5rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .col.false {
+      background-color: lightgreen;
+    }
+
+    .col.true {
+      background-color: indianred;
+    }
+
+    .col.even {
+      background-color: darkgray;
+      color: white;
+    }
+  </style>
+
+</head>
+
+<body>
+<div id="board" class="board">
+
+</div>
+
+<div id="board2" class="board">
+
+</div>
+
+<script>
+
+  const boardElement = document.querySelector('#board');
+  const board2Element = document.querySelector('#board2');
+  let board = [
+    [false, false, false, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, false],
+    [false, false, false, false, false],
+  ];
+
+  board = board.map(function(row, rowIndex){
+    return row.map(function(col, colIndex){
+      return rowIndex === colIndex;
+    });
+  });
+
+const evenRows = board.map(function(row, rowIndex) {
+  return row.map(function (col, colIndex) {
+    return colIndex % 2 !== 0;
+  });
+});
+
+  const evenColumns = board.map(function(row, rowIndex) {
+    return row.map(function (col, colIndex) {
+      return rowIndex % 2 !== 0;
+    });
+  });
+
+  const cross = board.map(function(row, rowIndex) {
+    return row.map(function (col, colIndex) {
+      return rowIndex ===  colIndex || row.length - 1 - rowIndex === colIndex ;
+    });
+  });
+
+  const invCross = board.map(function(row, rowIndex) {
+    return row.map(function (col, colIndex) {
+      return rowIndex !==  colIndex && row.length - 1 - rowIndex !== colIndex ;
+    });
+  });
+
+
+  const border = board.map(function(row, rowIndex, originalBoard) {
+    return row.map(function (col, colIndex) {
+      return rowIndex === 0 || rowIndex === originalBoard.length - 1 || colIndex === 0 || colIndex === originalBoard.length - 1;}
+      );
+  });
+
+/*
+
+
+  const chess = board.map(function(row, rowIndex) {
+    return row.map(function (col, colIndex) {
+    return (colIndex % 2 !== 0 && rowIndex % 2 === 0)  && (rowIndex % 2 !== 0 && colIndex % 2 === 0);}
+      );
+  });
+
+*/
+
+
+  const centerCross = board.map(function(row, rowIndex, originalBoard) {
+    return row.map(function (col, colIndex) {
+      return Math.ceil((originalBoard.length - 1)/2) === colIndex || Math.ceil((originalBoard.length -1) /2) === rowIndex || Math.floor((originalBoard.length - 1)/2) === colIndex || Math.floor((originalBoard.length - 1)/2) === rowIndex
+      ;}
+    );
+  });
+
+
+/*
+
+  const padding = board.map(function(row, rowIndex, originalBoard) {
+    return row.map(function (col, colIndex) {
+      return rowIndex[1] === 0 || rowIndex === originalBoard.length - 2 || colIndex[1] === 0 || colIndex === originalBoard.length - 2;
+    });
+  });
+*/
+
+
+  function drawBoard(board, boardElement) {
+    board.forEach(function(row, rowIndex){
+      const rowElement = document.createElement('div');
+      rowElement.classList.add('row');
+      row.forEach(function (col, colIndex) {
+        const colElement = document.createElement('div');
+        colElement.classList.add('col', col);
+        colElement.dataset.rowIndex = rowIndex;
+        colElement.dataset.colIndex = colIndex;
+        rowElement.appendChild(colElement);
+      });
+      boardElement.appendChild(rowElement);
+    });
+  }
+
+  drawBoard(board, boardElement);
+  drawBoard(evenRows, boardElement);
+  drawBoard(evenColumns, boardElement);
+  drawBoard(cross, boardElement);
+  drawBoard(border, boardElement);
+  drawBoard(invCross, boardElement);
+  //drawBoard(chess, boardElement);
+  drawBoard(centerCross, boardElement);
+  //drawBoard(padding, boardElement);
+
+
+  //array.forEach();
+  //array.map();
+  //array.reduce();
+
+  const testArray = [1,2,3,4];
+
+  const multipliedArray = testArray.reduce(function(accumulator, currentValue, currentIndex, originalArray){
+    return accumulator * currentValue;
+  }, 1);
+
+  console.log(multipliedArray);
+
+  const board2 = [
+    [1, 2, 3, 4, 5],
+    [6, 7, 8, 9, 10],
+    [11, 12, 13, 14, 15],
+    [16, 17, 18, 19, 20],
+    [21, 22, 23, 24, 25],
+  ];
+
+
+  const reducedBoard = board2.reduce(function(acc, rowVal){
+    const newRowVal = rowVal.reduce(function(rowAcc, colVal) {
+      if (colVal % 2 !== 0){
+        rowAcc.push(colVal);
+      }
+      return rowAcc;
+    }, []);
+    return acc.concat(newRowVal);
+  }, []);
+
+  console.log(reducedBoard);
+
+  const testArray2 = [
+    'Dallas Coyboys', 'Washington Redskins', 'New York Giants',
+    'Philadelphia Eagles', 'Chicago Bears', 'Minnesota Vikings',
+    'Detroit Lions', 'Green Bay Packers', 'Tampa Bay Buccaneers',
+    'New Orleans Saints', 'Carolina Panthers', 'Atlanta Falcons',
+    'Los Angeles Rams', 'Seattle Seahawks', 'Arizona Cardinals',
+    'San Francisco 49ers'
+  ];
+
+  const stringLength = testArray2.reduce(function(acc, currentValue){
+    return acc + currentValue.length;
+  }, 0);
+
+  console.log(stringLength);
+
+const numArray = [1,4,5,6,8,3,12,78];
+
+
+
+const minVal = numArray.reduce(function(acc, curVal){
+  if (acc === false)} else {
+    return curVal;
+
+  if curVal <= acc {
+    return curVal;}
+  }
+  return acc;
+
+}, false);
+
+console.log(minVal);
+
+const maxVal= numArray.reduce(function(acc, curVal){
+
+});
+
+console.log(maxVal);
+
+
+
+
+  const doubleEvenNumber = board2.map(function(rowElement, rowIndex, originalArray){
+    return rowElement.map(function(colElement, colIndex){
+      if (colElement%2 === 0) {
+        return colElement * 2;
+      } else {
+        return colElement;
+      }
+    });
+
+  });
+
+
+
+  function drawBoard2(board2, board2Element){
+    board2.forEach(function (row, rowIndex) {
+      const rowElement = document.createElement('div');
+      rowElement.classList.add('row');
+      row.forEach(function (col, colIndex) {
+        const colElement = document.createElement('div');
+        colElement.classList.add('col');
+        if(col % 2 === 0) {
+          colElement.classList.add('even');
+        }
+        colElement.dataset.rowIndex = rowIndex;
+        colElement.dataset.colIndex = colIndex;
+        colElement.textContent = col;
+        rowElement.appendChild(colElement);
+      });
+      board2Element.appendChild(rowElement);
+    });
+  }
+
+  drawBoard2(doubleEvenNumber, board2Element);
+</script>
+</body>
+</html>

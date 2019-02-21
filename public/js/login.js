@@ -1,11 +1,10 @@
-const loginSwitch = document.querySelector('.login-switch');
-const registerSwitch = document.querySelector('.register-switch');
-const loginForm = document.querySelector('.wrapper');
-const registerForm = document.querySelector('.wrapper-registration');
-const apiDomain = 'http://connect4.pienter.space/';
+var loginSwitch = document.querySelector('.login-switch');
+var registerSwitch = document.querySelector('.register-switch');
+var loginForm = document.querySelector('.wrapper');
+var registerForm = document.querySelector('.wrapper-registration');
+var apiDomain = 'http://connect4.pienter.space/';
 
-
-function switchForm(fromForm, toForm){
+function switchForm(fromForm, toForm) {
   fromForm.classList.add('hide');
   toForm.classList.remove('hide');
 }
@@ -21,33 +20,28 @@ function showRegisterForm(event) {
 }
 
 function getFormData(form) {
-  const inputFields = loginForm.querySelectorAll('input');
-  const formData = {};
+  var inputFields = loginForm.querySelectorAll('input');
+  var formData = {};
   inputFields.forEach(function (inputField) {
     postData[inputField.username] = inputField.value;
   });
   return formData;
 }
 
-function login(event){
+function login(event) {
   event.preventDefault();
-  const formData = getFormData(loginForm);
-  const request = new XMLHttpRequest();
-  request.addEventListener('readystatechange', function (event) {
-
-  });
+  var formData = getFormData(loginForm);
+  var request = new XMLHttpRequest();
+  request.addEventListener('readystatechange', function (event) {});
   request.open('POST', apiDomain + 'api/auth/login');
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify(formData));
 
-  function register(event){
+  function register(event) {
     event.preventDefault();
-    const formData = getFormData(registerForm);
-    const request = new XMLHttpRequest();
-    request.addEventListener('readystatechange', function (event) {
-
-    });
-
+    var formData = getFormData(registerForm);
+    var request = new XMLHttpRequest();
+    request.addEventListener('readystatechange', function (event) {});
     request.open('POST', apiDomain + 'api/auth/register');
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify(formData));
@@ -56,7 +50,7 @@ function login(event){
 
 loginSwitch.addEventListener('click', showRegisterForm);
 registerSwitch.addEventListener('click', showLoginForm);
-loginForm.addEventListener('submit', function(event) {
+loginForm.addEventListener('submit', function (event) {
   event.preventDefault();
 });
-
+//# sourceMappingURL=login.js.map

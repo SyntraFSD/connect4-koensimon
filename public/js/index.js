@@ -6,4 +6,10 @@ function showdropdown() {
 }
 
 hamburger.addEventListener('click', showdropdown);
+loginForm.addEventListener(submit, function (event) {
+  event.preventDefault();
+  console.log(event);
+});
+
+function getFormData(form) {}
 //# sourceMappingURL=index.js.map

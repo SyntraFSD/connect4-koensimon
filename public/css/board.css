@@ -1,0 +1,16 @@
+
+
+
+#board {
+  display: flex;
+  width: 90vw;
+  max-width: 700px;
+  height: auto;
+  margin: 0 auto;
+  border: solid 1px black;
+  }
+
+.row {
+  box-sizing: border-box;
+  border: solid 1px black;
+}
