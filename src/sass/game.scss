@@ -1,0 +1,81 @@
+$boardWidth: 80vw;
+$maxBoardWith: 600px;
+
+
+main {
+  display: flex;
+  justify-content: center;
+  padding-top: calc(#{$maxBoardWith} / 7);
+  #board {
+    box-sizing: border-box;
+    display: flex;
+    width: $boardWidth;
+    max-width: $maxBoardWith;
+    border: solid 1px black;
+
+    &.red .col:hover::before {
+      background-color: indianred;
+    }
+
+    &.yellow .col:hover::before {
+      background-color: yellow;
+    }
+
+    .row {
+      box-sizing: border-box;
+      border: solid 1px black;
+      width: calc(#{$boardWidth} / 7);
+      max-width: calc(#{$maxBoardWith} / 7);
+      height: calc(#{$boardWidth} / 7);
+      max-height: calc(#{$maxBoardWith} / 7);
+      position: relative;
+      background-color: black;
+
+      &::before {
+        content: '';
+        box-sizing: border-box;
+        border-radius: 50%;
+        display: block;
+        position: absolute;
+        top: 5%;
+        bottom: 5%;
+        left: 5%;
+        right: 5%;
+      }
+
+      &.empty::before {
+        background-color: navajowhite;
+      }
+
+      &.red::before {
+        background-color: indianred;
+      }
+
+      &.yellow::before {
+        background-color: yellow;
+      }
+    }
+
+    .col:hover::before {
+      content: '';
+      display: block;
+      width: calc(#{$boardWidth} / 7);
+      max-width: calc(#{$maxBoardWith} / 7);
+      height: calc(#{$boardWidth} / 7);
+      max-height: calc(#{$maxBoardWith} / 7);
+      position: absolute;
+      top: -20%;
+      border-radius: 50%;
+
+    }
+
+
+    .col {
+      position: relative;
+    }
+  }
+}
+
+h1 {
+
+}

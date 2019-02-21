@@ -3,8 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" href="css/login.css?v=1.0">
 </head>
 <body>
+<body>
 
+
+<nav>
+  <a href="#"><img src="img/logo.jpg" alt="logo"></a>
+  <div>
+    <a href="#">Connect 4</a>
+  </div>
+  <div class="smaller Header-links--desktop">
+    <a href="#">Stats</a>
+    <a href="login.html">Login</a>
+  </div>
+  <div class="Header-links--mobile">
+    <div class="Header-links--mobile-hamburger"></div>
+    <div class="Header-links--mobile-dropdown inactive">
+      <a class="Header-links--mobile-dropdown-link" href="#">Stats</a>
+      <a class="Header-links--mobile-dropdown-link" href="#">Login</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <form class="form-signin">
+    <h2 class="form-signin-heading">Login Page</h2>
+    <p class="error hide">Unautharized</p>
+    <input type="text" class="form-control" name="email" placeholder="Username" required="" autofocus="" />
+    <input type="password" class="form-control" name="password" placeholder="Password" required=""/><br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    <h4>If you don't have a log in, please register <a class="login-switch" href="#">here</a>.</h4><br>
+  </form>
+</div>
+<div class="wrapper-registration hide">
+  <form class="form-signin">
+    <h2 class="form-signin-heading">Registration</h2>
+    <input type="text" class="form-control" name="name" placeholder="Username" required="" autofocus="" />
+    <input type="text" class="form-control" name="email" placeholder="Email Adress" required=""/><br>
+    <input type="password" class="form-control" name="password" placeholder="Password" required=""/><br>
+    <input type="password" class="form-control" name="password-repeat" placeholder=" Repeat password" required=""/><br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    <h4>If you already have a login, click <a class="register-switch" href="#">here</a>.</h4><br>
+  </form>
+</div>
 </body>
+<script src="js/login.js"></script>
 </html>
