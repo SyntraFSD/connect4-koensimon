@@ -1,8 +1,8 @@
-const loginSwitch = document.querySelector('.login-switch');
-const registerSwitch = document.querySelector('.register-switch');
-const loginForm = document.querySelector('.wrapper');
-const registerForm = document.querySelector('.wrapper-registration');
-const loginAlert = document.querySelector('.error');
+var loginSwitch = document.querySelector('.login-switch');
+var registerSwitch = document.querySelector('.register-switch');
+var loginForm = document.querySelector('.wrapper');
+var registerForm = document.querySelector('.wrapper-registration');
+var loginAlert = document.querySelector('.error');
 
 function switchForm(fromForm, toForm) {
   fromForm.classList.add('hide');
@@ -25,6 +25,7 @@ function showLoginRequest(responseText, success) {
   } else {
     loginAlert.classList.remove('success');
   }
+
   loginAlert.classList.remove('hide');
   loginAlert.textContent = responseText;
 }
@@ -34,25 +35,26 @@ function hideLoginAlert() {
 }
 
 function getFormData(Form) {
-  const inputFields = Form.querySelectorAll('input');
-  const formData = {};
-  inputFields.forEach((inputField) => {
+  var inputFields = Form.querySelectorAll('input');
+  var formData = {};
+  inputFields.forEach(function (inputField) {
     formData[inputField.name] = inputField.value;
   });
   return formData;
 }
 
 function handleLoginRequest(event) {
-  const request = event.target;
+  var request = event.target;
+
   if (request.readyState === 4) {
-    const response = JSON.parse(request.responseText);
+    var response = JSON.parse(request.responseText);
+
     if (request.status >= 200 && request.status < 300) {
       showLoginRequest('joepie je bent ingelogd', true);
+
       if (response.access_token) {
         window.localStorage.setItem('token', response.access_token);
-        setTimeout(function () {
-          
-        })
+        setTimeout(function () {});
         window.location = 'closed.html';
       }
     } else if (request.status === 401) {
@@ -62,7 +64,8 @@ function handleLoginRequest(event) {
 }
 
 function handleRegisterRequest(event) {
-  const request = event.target;
+  var request = event.target;
+
   if (request.readyState === 4) {
     if (request.status >= 200 && request.status < 300) {
       console.log('success');
@@ -76,8 +79,8 @@ function handleRegisterRequest(event) {
 
 function login(event) {
   event.preventDefault();
-  const formData = getFormData(loginForm);
-  const request = new XMLHttpRequest();
+  var formData = getFormData(loginForm);
+  var request = new XMLHttpRequest();
   request.addEventListener('readystatechange', handleLoginRequest);
   request.open('POST', 'http://connect4.pienter.space/api/auth/login');
   request.setRequestHeader('Content-Type', 'application/json');
@@ -86,8 +89,8 @@ function login(event) {
 
 function register(event) {
   event.preventDefault();
-  const formData = getFormData(registerForm);
-  const request = new XMLHttpRequest();
+  var formData = getFormData(registerForm);
+  var request = new XMLHttpRequest();
   request.addEventListener('readystatechange', handleRegisterRequest);
   request.open('POST', 'http://connect4.pienter.space/api/auth/register');
   request.setRequestHeader('Content-Type', 'application/json');
@@ -99,5 +102,5 @@ registerSwitch.addEventListener('click', showLoginForm);
 loginForm.addEventListener('submit', login);
 registerForm.addEventListener('submit', register);
 loginForm.addEventListener('input', hideLoginAlert);
-
 window.history.pushState({}, 'test2', 'closed.html');
+//# sourceMappingURL=login.js.map

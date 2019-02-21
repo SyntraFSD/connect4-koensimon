@@ -5,6 +5,7 @@
   <title>AJAX For Life</title>
 </head>
 <body>
+<<<<<<< Updated upstream
 <input id="test-method-1" typr="text" value="GET">
 <input id="test-endpoint-1" typr="text" value="posts">
 
@@ -63,3 +64,46 @@
 
 </body>
 </html>
+=======
+  <input id="test-method-1" type="text" value="GET">
+  <input id="test-endpoint-1" type="text" value="posts/10">
+
+  <button id="test-btn-1">
+    Test AJAX 1
+  </button>
+
+  <div id="output"></div>
+  <script>
+    const testEndpoint = document.querySelector('#test-endpoint-1');
+    const testMethod = document.querySelector('#test-method-1')
+    const testBtn1 = document.querySelector("#test-btn-1");
+    const output = document.querySelector('#output');
+
+    function handleRequest(event){
+      const request = event.target;
+      if(request.readyState === 4){
+        //console.log(JSON.parse(request.responseText));
+        console.log(request.status);
+        if(request.status >= 200 && request.status < 300){
+         const response = JSON.parse(request.responseText);
+         output.textContent=response.title;
+        }else{
+          alert('How zeg das ni just');
+        }
+      }
+    }
+
+    testBtn1.addEventListener('click',function (event) {
+      const request=new XMLHttpRequest();
+      const endpoint = testEndpoint.value;
+      const method = testMethod.value;
+
+      request.addEventListener('readystatechange',handleRequest);
+
+      request.open(method,'https://jsonplaceholder.typicode.com/'+ endpoint);
+      request.send();
+    })
+  </script>
+</body>
+</html>
+>>>>>>> Stashed changes
