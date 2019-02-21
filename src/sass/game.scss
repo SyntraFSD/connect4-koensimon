@@ -1,17 +1,25 @@
 $boardWidth: 80vw;
-$maxBoardWith: 700px;
+$maxBoardWith: 600px;
 
 
 main {
   display: flex;
   justify-content: center;
-  padding-top: 2rem;
+  padding-top: calc(#{$maxBoardWith} / 7);
   #board {
     box-sizing: border-box;
     display: flex;
     width: $boardWidth;
     max-width: $maxBoardWith;
     border: solid 1px black;
+
+    &.red .col:hover::before {
+      background-color: indianred;
+    }
+
+    &.yellow .col:hover::before {
+      background-color: yellow;
+    }
 
     .row {
       box-sizing: border-box;
@@ -47,5 +55,27 @@ main {
         background-color: yellow;
       }
     }
+
+    .col:hover::before {
+      content: '';
+      display: block;
+      width: calc(#{$boardWidth} / 7);
+      max-width: calc(#{$maxBoardWith} / 7);
+      height: calc(#{$boardWidth} / 7);
+      max-height: calc(#{$maxBoardWith} / 7);
+      position: absolute;
+      top: -20%;
+      border-radius: 50%;
+
+    }
+
+
+    .col {
+      position: relative;
+    }
   }
+}
+
+h1 {
+
 }
