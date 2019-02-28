@@ -1,24 +1,35 @@
+// ----------------- 1. MODEL --------------------------
+
 // html elements
 let mainElement = document.querySelector('main');
 const drawMessage = document.querySelector('.drawMessage');
+let htmlboard = null;
+let state = null;
 
-initGameState();
 
-let state = {
-  turn: 'yellow',
-  winner: false,
-  winnerColor: null,
-  full: false,
-  board: [
-    ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-  ]
-};
+
+// -------------------- 2. UPDATE (only PURE functions here!) --------------------------
+function initGameState(){
+  return {
+    turn: 'yellow',
+    winner: false,
+    winnerColor: null,
+    full: false,
+    board: [
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+    ],
+  }
+}
+
+
+
+// ---------------------3. VIEW -----------------------------------------------
 
 function generateBoardHtml(board) {
   return board.reduce(function (colsHtml, col, colIndex) {
@@ -30,6 +41,13 @@ function generateBoardHtml(board) {
     return colsHtml + colHtml;
   }, '');
 }
+
+
+initGameState();
+
+
+
+
 function drawBoard(board, turn, htmlElement, boardElement) {
   if(!boardElement){
     boardElement = document.createElement('div');
@@ -52,14 +70,12 @@ function changeTurn(state, col) {
     htmlboard.classList.add('yellow');
   }
 
-
-
   return state;
 }
 
-function dropStone(colList,state) {
+function dropStone(colElement,state) {
 
-  const indexEmpty = state.board[colList.dataset.index].reduce(function (acc,value,index) {
+  const indexEmpty = state.board[colElement.dataset.index].reduce(function (acc,value,index) {
    if(acc === false){
      if(value === 'empty'){
        return index;
@@ -74,7 +90,7 @@ function dropStone(colList,state) {
   if (indexEmpty === false){
     return false;
   } else {
-    state.board[colList.dataset.index][indexEmpty] = state.turn;
+    state.board[colElement.dataset.index][indexEmpty] = state.turn;
     console.log(state.board);
     return state;
   }
@@ -94,23 +110,7 @@ function fullCheck(board) {
     return checkFull;
 }
 
-function initGameState(){
-  state = {
-    turn: 'yellow',
-    winner: false,
-    winnerColor: null,
-    full: false,
-    board: [
-      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-      ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
-    ]
-  }
-}
+
 
 function fullCheckChecker(state) {
   if (fullCheck(state.board) === true){
@@ -131,11 +131,12 @@ function stateMessage(state) {
 
 let htmlboard = drawBoard(state.board, state.turn, mainElement)
 
+// -------------------------- 4. EVENTS -----------------------------------------
 
 htmlboard.addEventListener('click', function (event) {
-  const colList = event.target.closest('.col');
+  const colElement = event.target.closest('.col');
   if(event.target.matches('.col,.row')) {
-    const newDrop = dropStone(colList, state);
+    const newDrop = dropStone(colElement, state);
     if (newDrop) {
 
       state = newDrop;
@@ -152,6 +153,12 @@ htmlboard.addEventListener('click', function (event) {
 
     }
   }
-});
+})
+window.addEventListener('load', function(){
+  state =  initGameState();
+  htmlboard = drawBoard(state.board, state.turn, mainElement)
+
+})
+;
 
 

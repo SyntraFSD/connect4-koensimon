@@ -1,14 +1,19 @@
+// ----------------- 1. MODEL --------------------------
 // html elements
 var mainElement = document.querySelector('main');
 var drawMessage = document.querySelector('.drawMessage');
-initGameState();
-var state = {
-  turn: 'yellow',
-  winner: false,
-  winnerColor: null,
-  full: false,
-  board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty']]
-};
+var state = null; // -------------------- 2. UPDATE (only pure functions here) --------------------------
+
+function initGameState() {
+  return {
+    turn: 'yellow',
+    winner: false,
+    winnerColor: null,
+    full: false,
+    board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty']]
+  };
+} // ---------------------3. VIEW -----------------------------------------------
+
 
 function generateBoardHtml(board) {
   return board.reduce(function (colsHtml, col, colIndex) {
@@ -20,6 +25,8 @@ function generateBoardHtml(board) {
     return colsHtml + colHtml;
   }, '');
 }
+
+initGameState();
 
 function drawBoard(board, turn, htmlElement, boardElement) {
   if (!boardElement) {
@@ -82,16 +89,6 @@ function fullCheck(board) {
   return checkFull;
 }
 
-function initGameState() {
-  state = {
-    turn: 'yellow',
-    winner: false,
-    winnerColor: null,
-    full: false,
-    board: [['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'], ['empty', 'empty', 'empty', 'empty', 'empty', 'empty']]
-  };
-}
-
 function fullCheckChecker(state) {
   if (fullCheck(state.board) === true) {
     state.full = true;
@@ -110,7 +107,8 @@ function stateMessage(state) {
   return "";
 }
 
-var htmlboard = drawBoard(state.board, state.turn, mainElement);
+var htmlboard = drawBoard(state.board, state.turn, mainElement); // -------------------------- 4. EVENTS -----------------------------------------
+
 htmlboard.addEventListener('click', function (event) {
   var colList = event.target.closest('.col');
 
@@ -130,4 +128,5 @@ htmlboard.addEventListener('click', function (event) {
     }
   }
 });
+window.addEventListener('load', functio());
 //# sourceMappingURL=game.js.map
