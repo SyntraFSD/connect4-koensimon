@@ -9,6 +9,7 @@
     "no-param-reassign": 0,
     "linebreak-style": 0,
     "radix": 0,
-    "prefer-template": 0
+    "prefer-template": 0,
+    "prefer-arrow-callback": 0,
   }
 }

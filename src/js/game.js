@@ -11,6 +11,13 @@ let state = {
   board: null,
 };
 
+const gameSettings = {
+  columns: 7,
+  rows: 6,
+};
+
+// 2 PURE functions
+
 function initGameState() {
   state = {
     turn: 'yellow',
@@ -27,12 +34,10 @@ function initGameState() {
       ['empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
     ],
   };
+  return state;
 }
 
-initGameState();
-
-
-// 2 PURE functions
+state = initGameState();
 
 function dropStone(colList, dropstate) {
   const newState = JSON.parse(JSON.stringify(dropstate));
@@ -95,6 +100,71 @@ function changeTurn(changestate) {
   return newState;
 }
 
+function makeSearchArrays(startColIndex, startRowIndex, colIncrement, rowIncrement,
+  arraygameSettings, makeArraysgamestate) {
+  const newState = JSON.parse(JSON.stringify(makeArraysgamestate));
+  const newSearchArray = [];
+  let colIndex = startColIndex;
+  let rowIndex = startRowIndex;
+  while (colIndex < gameSettings.columns
+  && rowIndex < gameSettings.rows
+  && colIndex >= 0 && rowIndex >= 0) {
+    newSearchArray.push(newState.board[colIndex][rowIndex]);
+    colIndex += colIncrement;
+    rowIndex += rowIncrement;
+  }
+  return newSearchArray;
+}
+
+function checkFor4color(array) {
+  const newArray = JSON.parse(JSON.stringify(array));
+  newArray.forEach(function (value) {
+    value.reduce(function (acc, val) {
+      let teller = 0;
+      const check = val.reduce(function (accumulator, itemval) {
+        if (itemval === 'empty') {
+          teller += 1;
+        } else {
+          teller = 0;
+        }
+
+        if (teller === 4) {
+          return true;
+        }
+      }, false);
+
+      if (check) {
+        return acc[acc.length] = val;
+      }
+      return acc;
+    }, []);
+  });
+  console.log(newArray);
+  return newArray;
+}
+
+function checkWinner(array) {
+
+}
+
+
+function searchForWinners(c4gameSettings, c4gamestate) {
+  const rowArray = [];
+  const colArray = [];
+
+  rowArray.push(c4gamestate.board.map(function (value, index) {
+    return makeSearchArrays(index, 0, 0, 1, c4gameSettings, c4gamestate);
+  }));
+
+  colArray.push(c4gamestate.board.map(function (value, index) {
+    return makeSearchArrays(0, index, 1, 0, c4gameSettings, c4gamestate);
+  }));
+
+
+  const Arrays = [checkFor4color(rowArray), checkFor4color(colArray)];
+
+  checkWinner(Arrays);
+}
 
 // 3 VIEW functions
 
@@ -107,12 +177,17 @@ function generateBoardHtml(board) {
   }, '');
 }
 
+function drawturn(boardElement, turn) {
+  boardElement.classList.add(turn);
+  boardElement.classList.remove(changeTurn(turn));
+}
+
 function drawBoard(board, turn, htmlElement, boardElement) {
   if (!boardElement) {
     boardElement = document.createElement('div');
+    boardElement.id = 'board';
   }
-  boardElement.id = 'board';
-  boardElement.classList.add(turn);
+  drawturn(boardElement, turn);
   boardElement.innerHTML = generateBoardHtml(board);
   htmlElement.appendChild(boardElement);
   return boardElement;
@@ -141,6 +216,7 @@ htmlboard.addEventListener('click', (event) => {
     if (newDrop) {
       state = newDrop;
       state = fullCheckChecker(state);
+      searchForWinners(gameSettings, state);
       changecolorstone(state.turn, htmlboard);
       state = changeTurn(state);
       drawMessage.textContent = stateMessage(state);
